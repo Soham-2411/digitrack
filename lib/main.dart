@@ -39,7 +39,7 @@ class _NavigationBarState extends State<NavigationBar> {
           'DigiTrack',
           style: TextStyle(
             fontFamily: 'GochiHand',
-            fontSize: 30,
+            fontSize: 31,
             fontWeight: FontWeight.bold,
           ),
         ),
