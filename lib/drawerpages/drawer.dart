@@ -2,11 +2,14 @@ import 'package:digitrack/drawerpages/about.dart';
 import 'package:digitrack/drawerpages/profile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+// import 'constants';
 
 class AppDrawer extends StatefulWidget {
   @override
   _AppDrawerState createState() => _AppDrawerState();
 }
+
+//TODO: don't change color here in this file
 
 class _AppDrawerState extends State<AppDrawer> {
   @override
@@ -100,19 +103,6 @@ class _AppDrawerState extends State<AppDrawer> {
                 context,
                 MaterialPageRoute(builder: (context) => About()),
               );
-            },
-          ),
-          ListTile(
-            title: const Text(
-              'Dark Mode',
-              style: TextStyle(
-                fontFamily: 'GochiHand',
-                fontSize: 20,
-                color: Colors.black,
-              ),
-            ),
-            onTap: () {
-              setState(() {});
             },
           ),
           ListTile(

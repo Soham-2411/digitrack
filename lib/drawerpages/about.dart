@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:digitrack/constants.dart';
 
 class About extends StatefulWidget {
   @override
@@ -23,7 +24,7 @@ class _AboutState extends State<About> {
         ),
         centerTitle: true,
       ),
-      backgroundColor: Colors.blueGrey[600],
+      backgroundColor: klightmodebackground,
       body: Column(
         children: [
           Row(
@@ -134,9 +135,9 @@ class _AboutState extends State<About> {
           Padding(
             padding: EdgeInsets.only(top: 20, left: 20),
             child: Text(
-              'An application to digitize your daily routines',
+              'An application to digitize your daily routines, included features are\n\n 1. Reminders\n 2. Shopping List\n 3. Diary\n 4. BMI and Health\n 5. WellBeing',
               style: TextStyle(
-                  fontSize: 30, color: Colors.black, fontFamily: 'GochiHand'),
+                  fontSize: 25, color: Colors.black, fontFamily: 'GochiHand'),
             ),
           )
         ],
