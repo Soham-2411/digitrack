@@ -9,7 +9,7 @@ class AppDrawer extends StatefulWidget {
   _AppDrawerState createState() => _AppDrawerState();
 }
 
-//TODO: don't change color here in this file
+//TODO: don't change colors here in this file
 
 class _AppDrawerState extends State<AppDrawer> {
   @override

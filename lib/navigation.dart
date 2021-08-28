@@ -1,5 +1,6 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:digitrack/drawerpages/drawer.dart';
+import 'package:digitrack/pages/bmi.dart';
 import 'package:flutter/material.dart';
 
 class NavigationBar extends StatefulWidget {
@@ -21,14 +22,14 @@ class _NavigationBarState extends State<NavigationBar> {
           'DigiTrack',
           style: TextStyle(
             fontFamily: 'GochiHand',
-            fontSize: 30,
+            fontSize: 32,
             fontWeight: FontWeight.bold,
           ),
         ),
         actions: <Widget>[
           IconButton(
             icon: Icon(
-              Icons.nights_stay_outlined,
+              Icons.nights_stay,
               color: nightMode,
             ),
             onPressed: () {
@@ -88,13 +89,14 @@ class _NavigationBarState extends State<NavigationBar> {
         },
       ),
       body: Center(
-        child: Container(
-          color: Colors.white,
-          child: Text(
-            'Welcome to DigiTrack',
-            style: TextStyle(fontFamily: 'GochiHand', fontSize: 15),
-          ),
-        ),
+        child: BMI(),
+        // child: Container(
+        //   color: Colors.white,
+        //   child: Text(
+        //     'Welcome to DigiTrack',
+        //     style: TextStyle(fontFamily: 'GochiHand', fontSize: 15),
+        //   ),
+        // ),
       ),
     ));
   }
