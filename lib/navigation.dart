@@ -1,6 +1,7 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:digitrack/drawerpages/drawer.dart';
 import 'package:digitrack/pages/bmi.dart';
+import 'package:digitrack/pages/shopping.dart';
 import 'package:flutter/material.dart';
 
 class NavigationBar extends StatefulWidget {
@@ -10,7 +11,7 @@ class NavigationBar extends StatefulWidget {
 
 class _NavigationBarState extends State<NavigationBar> {
   // int _bottomNavIndex = 0;
-  // int _page = 0;
+  int _page = 0;
   Color nightMode = Colors.white;
   @override
   Widget build(BuildContext context) {
@@ -84,12 +85,14 @@ class _NavigationBarState extends State<NavigationBar> {
         ],
         onTap: (index) {
           setState(() {
-            // _page = index;
+            _page = index;
           });
         },
+        letIndexChange: (index) => true,
       ),
       body: Center(
-        child: BMI(),
+        child: Shopping(),
+        //child: BMI(),
         // child: Container(
         //   color: Colors.white,
         //   child: Text(

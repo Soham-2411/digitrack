@@ -25,6 +25,7 @@ int h = 0;
 int w = 0;
 double _bmi = (w / pow(h, 2)) * 10000;
 String bmi = _bmi.toStringAsFixed(0);
+Color bmiColor = Colors.white;
 
 class _BMIState extends State<BMI> {
   @override
@@ -320,6 +321,15 @@ class _BMIState extends State<BMI> {
                     h = int.parse(height);
                     w = int.parse(weight);
                     _bmi = (w / pow(h, 2)) * 10000;
+                    if (_bmi < 18.5) {
+                      bmiColor = Colors.blue;
+                    } else if (_bmi >= 18.5) {
+                      if (_bmi >= 25) {
+                        bmiColor = Colors.red;
+                      } else {
+                        bmiColor = Colors.green;
+                      }
+                    }
                     bmi = _bmi.toStringAsFixed(1);
                     Navigator.push(
                       context,
@@ -382,7 +392,7 @@ class _ResultPageState extends State<ResultPage> {
                   Text(
                     'Your bmi is $bmi',
                     style: TextStyle(
-                        color: klightmodebackground,
+                        color: bmiColor,
                         fontFamily: 'GochiHand',
                         fontWeight: FontWeight.bold,
                         fontSize: 30),
