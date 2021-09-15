@@ -54,6 +54,7 @@ class _BMIState extends State<BMI> {
           Padding(
             padding: EdgeInsets.only(left: 10.0, right: 10.0, bottom: 10.0),
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Container(
                   decoration: BoxDecoration(
@@ -177,6 +178,7 @@ class _BMIState extends State<BMI> {
             child: Padding(
               padding: EdgeInsets.only(left: 10.0, right: 10, bottom: 10),
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Container(
                     decoration: BoxDecoration(

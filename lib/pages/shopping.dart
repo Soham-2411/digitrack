@@ -56,30 +56,30 @@ class _ShoppingState extends State<Shopping> {
             width: 135,
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20), color: klightmode),
-            child: Padding(
-              padding: const EdgeInsets.all(2.0),
-              child: Row(
-                children: [
-                  TextButton(
-                    onPressed: () {},
-                    child: Row(
-                      children: [
-                        Text(
-                          'Add Items',
-                          style: TextStyle(
-                              fontFamily: 'GochiHand',
-                              fontSize: 20,
-                              color: Colors.white),
-                        ),
-                        SizedBox(width: 2),
-                        Icon(
-                          Icons.add,
-                          color: Colors.white,
-                        ),
-                      ],
+            child: Center(
+              child: TextButton(
+                style: TextButton.styleFrom(
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20)),
+                    primary: klightmode),
+                onPressed: () {},
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Add Items',
+                      style: TextStyle(
+                          fontFamily: 'GochiHand',
+                          fontSize: 20,
+                          color: Colors.white),
                     ),
-                  ),
-                ],
+                    SizedBox(width: 2),
+                    Icon(
+                      Icons.add,
+                      color: Colors.white,
+                    ),
+                  ],
+                ),
               ),
             ),
           ),

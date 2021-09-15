@@ -1,7 +1,10 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:digitrack/drawerpages/drawer.dart';
 import 'package:digitrack/pages/bmi.dart';
+import 'package:digitrack/pages/note.dart';
+import 'package:digitrack/pages/reminders.dart';
 import 'package:digitrack/pages/shopping.dart';
+import 'package:digitrack/pages/wellbeing.dart';
 import 'package:flutter/material.dart';
 
 class NavigationBar extends StatefulWidget {
@@ -68,12 +71,12 @@ class _NavigationBarState extends State<NavigationBar> {
             color: Colors.white,
           ),
           Icon(
-            Icons.note,
+            Icons.book,
             size: 30,
             color: Colors.white,
           ),
           Icon(
-            Icons.fitness_center,
+            Icons.timer,
             size: 30,
             color: Colors.white,
           ),
@@ -86,20 +89,21 @@ class _NavigationBarState extends State<NavigationBar> {
         onTap: (index) {
           setState(() {
             _page = index;
+            print(index);
           });
         },
         letIndexChange: (index) => true,
       ),
       body: Center(
-        child: Shopping(),
-        //child: BMI(),
-        // child: Container(
-        //   color: Colors.white,
-        //   child: Text(
-        //     'Welcome to DigiTrack',
-        //     style: TextStyle(fontFamily: 'GochiHand', fontSize: 15),
-        //   ),
-        // ),
+        child: (_page == 0)
+            ? BMI()
+            : (_page == 1)
+                ? Shopping()
+                : (_page == 2)
+                    ? Notes()
+                    : (_page == 3)
+                        ? Reminders()
+                        : WellBeing(),
       ),
     ));
   }
