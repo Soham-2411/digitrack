@@ -28,13 +28,29 @@ class _NotesState extends State<Notes> {
                   });
                 },
               ),
-              Text(
-                  _diarydate.day.toString() +
-                      '-' +
-                      _diarydate.month.toString() +
-                      '-' +
-                      _diarydate.year.toString(),
-                  style: TextStyle(fontSize: 30, fontFamily: 'GochiHand')),
+              TextButton(
+                  onPressed: () async {
+                    DateTime _dateTime = await showDatePicker(
+                        context: context,
+                        initialDate: DateTime.now(),
+                        firstDate: DateTime(1900),
+                        lastDate: DateTime(2100));
+                    if (_dateTime != null) {
+                      setState(() {
+                        _diarydate = _dateTime;
+                      });
+                    }
+                  },
+                  child: Text(
+                      _diarydate.day.toString() +
+                          '-' +
+                          _diarydate.month.toString() +
+                          '-' +
+                          _diarydate.year.toString(),
+                      style: TextStyle(
+                          color: klightmode,
+                          fontSize: 30,
+                          fontFamily: 'GochiHand'))),
               IconButton(
                 icon: Icon(Icons.arrow_right_outlined),
                 onPressed: () {
@@ -62,6 +78,27 @@ class _NotesState extends State<Notes> {
                     child: Container(
                         padding: EdgeInsets.all(15),
                         child: Icon(Icons.edit, color: klightmode)),
+                  ),
+                ),
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: Container(
+                    padding: EdgeInsets.all(20),
+                    child: RichText(
+                      text: TextSpan(children: [
+                        TextSpan(
+                            text: "SUMMER HOLIDAYS\n\n",
+                            style: TextStyle(
+                                fontSize: w * 0.07,
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold)),
+                        TextSpan(
+                            text:
+                                "Today, my summer holidays have begun. I have some plans for summer vacation. I’m planning to go to a wildlife sanctuary and for boating in a lake. I just don’t want to spend a single moment idly and definitely want to enjoy every bit of these holidays.",
+                            style: TextStyle(
+                                color: Colors.white, fontSize: w * 0.04))
+                      ]),
+                    ),
                   ),
                 )
               ],
