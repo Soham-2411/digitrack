@@ -7,6 +7,8 @@ class Shopping extends StatefulWidget {
   _ShoppingState createState() => _ShoppingState();
 }
 
+List<String> _shoppingList = ['Eggs'];
+
 class _ShoppingState extends State<Shopping> {
   @override
   Widget build(BuildContext context) {
@@ -38,18 +40,20 @@ class _ShoppingState extends State<Shopping> {
               width: 450,
               height: 485,
               child: Padding(
-                padding: EdgeInsets.all(10.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Items('Buy Bread'),
-                    SizedBox(height: 10),
-                    Items('Buy Milk'),
-                    SizedBox(height: 10),
-                    Items('Buy Eggs'),
-                  ],
-                ),
-              ),
+                  padding: EdgeInsets.all(10.0),
+                  child: ListView.builder(
+                    itemCount: _shoppingList.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return Column(
+                        children: [
+                          Items(_shoppingList[index]),
+                          SizedBox(
+                            height: 10,
+                          )
+                        ],
+                      );
+                    },
+                  )),
             ),
           ),
           Container(
@@ -62,7 +66,11 @@ class _ShoppingState extends State<Shopping> {
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20)),
                     primary: klightmode),
-                onPressed: () {},
+                onPressed: () {
+                  setState(() {
+                    showAlertDialog(context);
+                  });
+                },
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -87,25 +95,75 @@ class _ShoppingState extends State<Shopping> {
       ),
     );
   }
-}
 
-Container Items(String textt) {
-  String text = textt;
-  return Container(
-    color: Colors.white,
-    width: 300,
-    height: 50,
-    child: Row(
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
-      children: [
-        Text(
-          text,
-          style: TextStyle(fontSize: 30, fontFamily: 'GochiHand'),
-        ),
-        SizedBox(width: 100),
-        Icon(Icons.edit),
-        Icon(Icons.delete, size: 30),
+  showAlertDialog(BuildContext context) {
+    String addedValue;
+
+    Widget cancelButton = TextButton(
+      child: Text("Cancel"),
+      onPressed: () {},
+    );
+
+    Widget addButton = TextButton(
+      child: Text("Add"),
+      onPressed: () {
+        setState(() {
+          if (addedValue != null) {
+            _shoppingList.add(addedValue);
+          }
+        });
+        Navigator.pop(context);
+      },
+    );
+
+    AlertDialog alert = AlertDialog(
+      title: Text("AlertDialog"),
+      content: TextField(
+        onChanged: (value) {
+          setState(() {
+            addedValue = value;
+          });
+        },
+      ),
+      actions: [
+        cancelButton,
+        addButton,
       ],
-    ),
-  );
+    );
+
+    // show the dialog
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
+  }
+
+  Container Items(String textt) {
+    String text = textt;
+    return Container(
+      color: Colors.white,
+      width: 300,
+      height: 50,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          Text(
+            text,
+            style: TextStyle(fontSize: 30, fontFamily: 'GochiHand'),
+          ),
+          SizedBox(width: 100),
+          IconButton(
+            icon: Icon(Icons.delete, size: 30),
+            onPressed: () {
+              setState(() {
+                _shoppingList.remove(textt);
+              });
+            },
+          ),
+        ],
+      ),
+    );
+  }
 }
