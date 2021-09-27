@@ -38,7 +38,6 @@ class _NavigationBarState extends State<NavigationBar> {
             ),
             onPressed: () {
               // do something
-              //TODO: Add dark mode here
               setState(() {
                 if (nightMode == Colors.white)
                   nightMode = Colors.black;
@@ -80,11 +79,6 @@ class _NavigationBarState extends State<NavigationBar> {
             size: 30,
             color: Colors.white,
           ),
-          Icon(
-            Icons.self_improvement,
-            size: 30,
-            color: Colors.white,
-          ),
         ],
         onTap: (index) {
           setState(() {
@@ -94,16 +88,13 @@ class _NavigationBarState extends State<NavigationBar> {
         letIndexChange: (index) => true,
       ),
       body: Center(
-        child: (_page == 0)
-            ? BMI()
-            : (_page == 1)
-                ? Shopping()
-                : (_page == 2)
-                    ? Notes()
-                    : (_page == 3)
-                        ? Reminders()
-                        : WellBeing(),
-      ),
+          child: (_page == 0)
+              ? BMI()
+              : (_page == 1)
+                  ? Shopping()
+                  : (_page == 2)
+                      ? Notes()
+                      : Reminders()),
     ));
   }
 }
