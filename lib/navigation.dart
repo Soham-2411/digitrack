@@ -89,7 +89,6 @@ class _NavigationBarState extends State<NavigationBar> {
         onTap: (index) {
           setState(() {
             _page = index;
-            print(index);
           });
         },
         letIndexChange: (index) => true,
