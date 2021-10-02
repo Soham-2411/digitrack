@@ -18,6 +18,10 @@ dependencies:
   url_launcher: ^6.0.9
   font_awesome_flutter: ^9.1.0
   shared_preferences:
+  flutter_local_notifications: ^8.2.0
+  intl:
+  hexcolor:
+  page_transition:
 
 dev_dependencies:
   flutter_test:
