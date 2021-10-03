@@ -75,22 +75,6 @@ class _AppDrawerState extends State<AppDrawer> {
           ),
           ListTile(
             title: const Text(
-              'Profile',
-              style: TextStyle(
-                fontFamily: 'GochiHand',
-                fontSize: 20,
-                color: Colors.black,
-              ),
-            ),
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => Profile()),
-              );
-            },
-          ),
-          ListTile(
-            title: const Text(
               'About',
               style: TextStyle(
                 fontFamily: 'GochiHand',

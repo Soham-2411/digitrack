@@ -6,7 +6,6 @@ import 'package:digitrack/pages/bmi.dart';
 import 'package:digitrack/pages/note.dart';
 import 'package:digitrack/pages/reminders.dart';
 import 'package:digitrack/pages/shopping.dart';
-import 'package:digitrack/pages/wellbeing.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
@@ -84,23 +83,6 @@ class _NavigationBarState extends State<NavigationBar> {
             fontWeight: FontWeight.bold,
           ),
         ),
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(
-              Icons.nights_stay,
-              color: nightMode,
-            ),
-            onPressed: () {
-              // do something
-              setState(() {
-                if (nightMode == Colors.white)
-                  nightMode = Colors.black;
-                else
-                  nightMode = Colors.white;
-              });
-            },
-          )
-        ],
         centerTitle: true,
         backgroundColor: Colors.blueGrey[800],
       ),

@@ -12,15 +12,18 @@ List<String> _shoppingList = ['Eggs'];
 class _ShoppingState extends State<Shopping> {
   @override
   Widget build(BuildContext context) {
+    double pw = MediaQuery.of(context).size.width;
+    double ph = MediaQuery.of(context).size.height;
     return Container(
       child: SingleChildScrollView(
         child: Column(
           children: [
             Padding(
-              padding: EdgeInsets.all(10.0),
+              padding:
+                  EdgeInsets.only(left: 10.0, right: 10, bottom: 10, top: 10),
               child: Container(
-                width: 450,
-                height: 40,
+                width: pw,
+                height: ph * 0.045,
                 decoration: BoxDecoration(
                     color: klightmode, borderRadius: BorderRadius.circular(5)),
                 child: Center(
@@ -34,12 +37,12 @@ class _ShoppingState extends State<Shopping> {
               ),
             ),
             Padding(
-              padding: EdgeInsets.all(10.0),
+              padding: EdgeInsets.only(left: 10.0, right: 10.0, bottom: 10.0),
               child: Container(
                 decoration: BoxDecoration(
                     color: klightmode, borderRadius: BorderRadius.circular(5)),
-                width: 450,
-                height: 485,
+                width: pw,
+                height: ph * 0.635,
                 child: Padding(
                     padding: EdgeInsets.all(10.0),
                     child: ListView.builder(
@@ -49,7 +52,7 @@ class _ShoppingState extends State<Shopping> {
                           children: [
                             Items(_shoppingList[index], index),
                             SizedBox(
-                              height: 10,
+                              height: ph * 0.01,
                             )
                           ],
                         );
@@ -57,37 +60,41 @@ class _ShoppingState extends State<Shopping> {
                     )),
               ),
             ),
-            Container(
-              width: 135,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20), color: klightmode),
-              child: Center(
-                child: TextButton(
-                  style: TextButton.styleFrom(
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20)),
-                      primary: klightmode),
-                  onPressed: () {
-                    setState(() {
-                      showAddDialog(context);
-                    });
-                  },
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        'Add Items',
-                        style: TextStyle(
-                            fontFamily: 'GochiHand',
-                            fontSize: 20,
-                            color: Colors.white),
-                      ),
-                      SizedBox(width: 2),
-                      Icon(
-                        Icons.add,
-                        color: Colors.white,
-                      ),
-                    ],
+            Padding(
+              padding: const EdgeInsets.only(left: 10.0, right: 10, bottom: 10),
+              child: Container(
+                width: pw * 0.5,
+                height: ph * 0.07,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10), color: klightmode),
+                child: Center(
+                  child: TextButton(
+                    style: TextButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20)),
+                        primary: klightmode),
+                    onPressed: () {
+                      setState(() {
+                        showAddDialog(context);
+                      });
+                    },
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'Add Items',
+                          style: TextStyle(
+                              fontFamily: 'GochiHand',
+                              fontSize: 20,
+                              color: Colors.white),
+                        ),
+                        SizedBox(width: 2),
+                        Icon(
+                          Icons.add,
+                          color: Colors.white,
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
@@ -225,11 +232,13 @@ class _ShoppingState extends State<Shopping> {
   }
 
   Container Items(String textt, int index) {
+    double pw = MediaQuery.of(context).size.width;
+    double ph = MediaQuery.of(context).size.height;
     String text = textt;
     return Container(
       color: Colors.white,
-      width: 300,
-      height: 50,
+      width: pw,
+      height: ph * 0.07,
       padding: EdgeInsets.only(left: 20),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,

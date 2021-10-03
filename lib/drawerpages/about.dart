@@ -135,7 +135,7 @@ class _AboutState extends State<About> {
           Padding(
             padding: EdgeInsets.only(top: 20, left: 20),
             child: Text(
-              'An application to digitize your daily routines, included features are\n\n 1. Reminders\n 2. Shopping List\n 3. Diary\n 4. BMI and Health\n 5. WellBeing',
+              'An application to digitize your daily routines, included features are\n\n 1. Reminders\n 2. Shopping List\n 3. Diary\n 4. BMI and Health',
               style: TextStyle(
                   fontSize: 25, color: Colors.black, fontFamily: 'GochiHand'),
             ),
