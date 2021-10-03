@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:digitrack/drawerpages/drawer.dart';
 import 'package:digitrack/pages/bmi.dart';
@@ -6,17 +8,69 @@ import 'package:digitrack/pages/reminders.dart';
 import 'package:digitrack/pages/shopping.dart';
 import 'package:digitrack/pages/wellbeing.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 class NavigationBar extends StatefulWidget {
+  final int page;
+  const NavigationBar({Key key, this.page = 0}) : super(key: key);
   @override
   _NavigationBarState createState() => _NavigationBarState();
 }
 
+List<DateTime> reminders = [];
+List<String> remindersName = [];
+
 class _NavigationBarState extends State<NavigationBar> {
   // int _bottomNavIndex = 0;
-  int _page = 0;
   Color nightMode = Colors.white;
+  FlutterLocalNotificationsPlugin localNotification;
+  DateTime _dateTime = DateTime.now();
+  Timer _timer;
+  int _page;
   @override
+  void initState() {
+    _page = widget.page;
+    super.initState();
+    var androidInitialize = new AndroidInitializationSettings('ic_launcher');
+    var iosInitialize = new IOSInitializationSettings();
+    var initializationSettings = new InitializationSettings(
+        android: androidInitialize, iOS: iosInitialize);
+    localNotification = new FlutterLocalNotificationsPlugin();
+    localNotification.initialize(initializationSettings);
+    print("Timer");
+    print(_dateTime);
+    print(reminders);
+    print(remindersName);
+    _reminderTimer();
+  }
+
+  void _reminderTimer() {
+    _timer = Timer.periodic(Duration(minutes: 1), (timer) {
+      print("Timer running");
+      setState(() {
+        _dateTime = DateTime.now();
+      });
+      for (int c = 0; c < reminders.length; c++) {
+        if (_dateTime.day == reminders[c].day &&
+            _dateTime.month == reminders[c].month &&
+            _dateTime.hour == reminders[c].hour &&
+            _dateTime.minute == reminders[c].minute) {
+          _showNotifications(remindersName[c]);
+        }
+      }
+    });
+  }
+
+  Future _showNotifications(String heading) async {
+    var androidDetails =
+        new AndroidNotificationDetails("channelId", "Digitrack", heading);
+    var iosDetails = new IOSNotificationDetails();
+    var generalNotifcationDetails =
+        new NotificationDetails(android: androidDetails, iOS: iosDetails);
+    await localNotification.show(
+        0, "Digitrack Reminder", heading, generalNotifcationDetails);
+  }
+
   Widget build(BuildContext context) {
     return Container(
         child: Scaffold(
@@ -52,7 +106,7 @@ class _NavigationBarState extends State<NavigationBar> {
       ),
       drawer: AppDrawer(),
       bottomNavigationBar: CurvedNavigationBar(
-        index: 0,
+        index: _page,
         animationCurve: Curves.easeInOutCubic,
         color: Colors.blueGrey[800],
         animationDuration: Duration(milliseconds: 250),
