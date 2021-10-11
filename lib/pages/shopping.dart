@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:shared_preferences/shared_preferences.dart';
 import '../constants.dart';
 
 class Shopping extends StatefulWidget {
@@ -7,9 +7,35 @@ class Shopping extends StatefulWidget {
   _ShoppingState createState() => _ShoppingState();
 }
 
-List<String> _shoppingList = ['Eggs'];
+List<String> _shoppingList;
+
+void _destroyData() async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  prefs.setStringList('ShoppingList', ['']);
+  await _getData();
+}
+
+Future<String> _getData() async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  _shoppingList = prefs.getStringList('ShoppingList');
+  if (_shoppingList == null) {
+    _shoppingList = [''];
+  }
+  print(_shoppingList);
+  return "Task successful";
+}
+
+void _setData() async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  prefs.setStringList('ShoppingList', _shoppingList);
+}
 
 class _ShoppingState extends State<Shopping> {
+  void initState() {
+    super.initState();
+    // _destroyData();
+  }
+
   @override
   Widget build(BuildContext context) {
     double pw = MediaQuery.of(context).size.width;
@@ -43,21 +69,36 @@ class _ShoppingState extends State<Shopping> {
                     color: klightmode, borderRadius: BorderRadius.circular(5)),
                 width: pw,
                 height: ph * 0.635,
-                child: Padding(
-                    padding: EdgeInsets.all(10.0),
-                    child: ListView.builder(
-                      itemCount: _shoppingList.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        return Column(
-                          children: [
-                            Items(_shoppingList[index], index),
-                            SizedBox(
-                              height: ph * 0.01,
-                            )
-                          ],
-                        );
-                      },
-                    )),
+                child: FutureBuilder(
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return Center(
+                        child: CircularProgressIndicator(
+                          color: Colors.white,
+                        ),
+                      );
+                    }
+                    return Padding(
+                        padding: EdgeInsets.all(10.0),
+                        child: (_shoppingList.length > 0 &&
+                                _shoppingList[0] != '')
+                            ? ListView.builder(
+                                itemCount: _shoppingList.length,
+                                itemBuilder: (BuildContext context, int index) {
+                                  return Column(
+                                    children: [
+                                      Items(_shoppingList[index], index),
+                                      SizedBox(
+                                        height: ph * 0.01,
+                                      )
+                                    ],
+                                  );
+                                },
+                              )
+                            : Container());
+                  },
+                  future: _getData(),
+                ),
               ),
             ),
             Padding(
@@ -132,7 +173,12 @@ class _ShoppingState extends State<Shopping> {
       onPressed: () {
         setState(() {
           if (addedValue != null) {
-            _shoppingList.add(addedValue);
+            if (_shoppingList[0] == '') {
+              _shoppingList = [addedValue];
+            } else {
+              _shoppingList.add(addedValue);
+            }
+            _setData();
           }
         });
         Navigator.pop(context);
@@ -148,9 +194,7 @@ class _ShoppingState extends State<Shopping> {
           )),
       content: TextField(
         onChanged: (value) {
-          setState(() {
-            addedValue = value;
-          });
+          addedValue = value;
         },
       ),
       actions: [
@@ -195,6 +239,7 @@ class _ShoppingState extends State<Shopping> {
         setState(() {
           if (addedValue != null) {
             _shoppingList[index] = addedValue;
+            _setData();
           }
         });
         Navigator.pop(context);
@@ -211,9 +256,7 @@ class _ShoppingState extends State<Shopping> {
       content: TextFormField(
         initialValue: item,
         onChanged: (value) {
-          setState(() {
-            addedValue = value;
-          });
+          addedValue = value;
         },
       ),
       actions: [

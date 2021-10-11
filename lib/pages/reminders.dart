@@ -18,7 +18,7 @@ DateTime _dateTime = DateTime.now();
 
 Color _tileColor = klightmode;
 
-Future<void> destroyData() async {
+Future<void> _destroyData() async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   prefs.setStringList('RemindersHeader', ['']);
   prefs.setStringList('RemindersTime', ['']);
@@ -586,7 +586,7 @@ showAlertDialogDelete(
           color: Colors.white,
         )),
     onPressed: () {
-      destroyData();
+      _destroyData();
       Navigator.pushReplacement(
           context,
           PageTransition(
