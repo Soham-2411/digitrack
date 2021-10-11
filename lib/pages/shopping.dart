@@ -305,6 +305,7 @@ class _ShoppingState extends State<Shopping> {
                 onPressed: () {
                   setState(() {
                     _shoppingList.remove(textt);
+                    _setData();
                   });
                 },
               ),
